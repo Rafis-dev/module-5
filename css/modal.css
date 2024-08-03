@@ -1,0 +1,303 @@
+.modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.33);
+  padding: 50px;
+  overflow-y: auto;
+  display: none;
+}
+
+.modal__body {
+  position: relative;
+  max-width: 792px;
+  width: 100%;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 0.6px;
+  background-color: #F4F2FF;
+  color: #6E6893;
+  margin: 0 auto;
+  padding: 32px 106px 28px;
+}
+
+.modal__title {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+  padding-bottom: 21px;
+  border-bottom: 1px solid #c6c2de;
+  margin-bottom: 21px;
+}
+
+
+.modal__btn {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 20px;
+  right: 30px;
+}
+
+.modal__btn-close {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  right: 0;
+  background-color: #6E6893;
+}
+
+.modal__btn-close_line_first {
+  transform: rotate(-45deg);
+}
+
+.modal__btn-close_line_second {
+  transform: rotate(45deg);
+}
+
+.form__fieldset {
+  text-align: left;
+  border: none;
+  border-radius: 8px;
+  padding: 28px;
+  background-color: #FFFFFF;
+  filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.20));
+  margin-bottom: 28px;
+}
+
+.form__label {
+  display: block;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  padding-left: 10px;
+}
+
+.form__input {
+  width: 100%;
+  display: block;
+  border-radius: 6px;
+  background-color: #F4F2FF;
+  color: #000;
+  font-weight: 400;
+  border: none;
+  padding: 13.11px 13px;
+}
+
+.form__input:disabled {
+  background-color: #EEEEEE;
+}
+
+.discount-box {
+  position: relative;
+  padding-left: 50px;
+}
+
+.form__checkbox {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.form__checkbox::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  background-color: #F4F2FF;
+  border-radius: 6px;
+}
+
+.form__checkbox::after {
+  content: '';
+  position: absolute;
+  bottom: 20px;
+  left: 10px;
+  width: 20px;
+  height: 10px;
+  border: 3px solid black;
+  border-top: none;
+  border-right: none;
+  opacity: 0;
+  transform: rotate(-45deg);
+}
+
+.form__checkbox:checked:after {
+  opacity: 1
+}
+
+
+.form__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(4, 60px);
+  gap: 12px 24px;
+}
+
+.form__grid-name,
+.form__grid-category,
+.form__grid-unit,
+.form__grid-discount {
+  grid-column: 1 / 2;
+}
+
+.form__grid-descr,
+.form__grid-quantity,
+.form__grid-price {
+  grid-column: 2 / 3;
+}
+
+.form__grid-descr {
+  grid-row: 1 / 3;
+}
+
+.form__grid-quantity {
+  grid-row: 3 / 4;
+}
+
+.form__input_textarea_descr {
+  height: 112px;
+  resize: none;
+}
+
+.form__grid-file {
+  padding-top: 20px;
+  grid-column: 2 / 3;
+}
+
+.form__label_type_file {
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #fff;
+  background: #6d5bd0;
+  padding: 11px 22px;
+  margin: 0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.form__button {
+  color: #FFF;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+  text-transform: uppercase;
+  border-radius: 6px;
+  background: #6D5BD0;
+  padding: 10px 25px;
+  display: inline-block;
+
+}
+
+.amount {
+  font-weight: 500;
+  font-size: 14px;
+  color: #6e6893;
+
+}
+
+.amount__number {
+  font-weight: 700;
+  font-size: 18px;
+  color: #6d5bd0;
+}
+
+.form__footer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 0 28px;
+}
+
+@media (max-width: 940px) {
+
+  .modal {
+    padding: 25px;
+  }
+
+  .modal__body {
+    padding: 32px 55px 28px
+  }
+
+  .form__fieldset {
+    padding: 14px;
+  }
+
+}
+
+
+@media (max-width: 740px) {
+  .form__grid {
+    display: block;
+  }
+
+  .form__grid-item:not(:last-child) {
+    margin-bottom: 12px;
+  }
+
+  .form__grid-file {
+    padding-top: 0;
+  }
+
+  .form__grid-item:nth-last-child(2) {
+    margin-bottom: 32px;
+  }
+
+  .form__label_type_file {
+    text-align: center;
+  }
+
+  .form__footer {
+    padding: 0;
+  }
+
+}
+
+@media (max-width: 540px) {
+
+  .modal__title {
+    font-size: 16px;
+  }
+
+  .modal {
+    padding: 0;
+  }
+
+  .modal__body {
+    padding: 20px;
+  }
+
+  .modal__btn {
+    top: 15px;
+    right: 15px;
+  }
+
+  .form__label_type_file {
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .form__amount {
+    font-size: 12px;
+  }
+
+  .form__amount-number {
+    font-size: 14px;
+  }
+
+  .form__button {
+    flex-basis: 100%;
+    font-size: 14px;
+  }
+
+}
