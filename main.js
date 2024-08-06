@@ -1,7 +1,28 @@
-const modalTitle = document.querySelector('.modal__title');
-const modalId = document.querySelector('.modal__id');
-const modalButton = document.querySelector('.modal__btn');
-const modalForm = document.querySelector('.modal__form');
-const discountCheckbox = document.querySelector('.form__checkbox');
-const discountInput = document.querySelector('#discount');
-const totalPrice = document.querySelector('.amount__number');
+const list = document.querySelector('.list');
+
+const createListItems = () => {
+  const userPromt = prompt('Введите что-нибудь').trim();
+
+  switch (userPromt) {
+    case 'del':
+      if (list.lastElementChild) {
+        list.lastElementChild.remove();
+      }
+      break;
+    case 'clear':
+      list.innerHTML = '';
+      break;
+    case '':
+    case ' ':
+      return createListItems();
+    case 'exit':
+    case null:
+      return;
+    default:
+      list.insertAdjacentHTML('beforeend', `<li>${userPromt}</li>`);
+  }
+
+  createListItems();
+};
+
+createListItems();
