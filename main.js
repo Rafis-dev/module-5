@@ -96,6 +96,7 @@ const createRow = item => {
 const renderGoods = items => {
   const tbody = document.querySelector('.table__body');
 
+  tbody.innerHTML = '';
   items.map(createRow).forEach(row => tbody.append(row));
 };
 
