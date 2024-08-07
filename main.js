@@ -1,9 +1,13 @@
 const list = document.querySelector('.list');
 
 const createListItems = () => {
-  const userPromt = prompt('Введите что-нибудь').trim();
+  const userPromt = prompt('Введите что-нибудь');
 
-  switch (userPromt) {
+  if (userPromt === null) {
+    return;
+  }
+
+  switch (userPromt.trim()) {
     case 'del':
       if (list.lastElementChild) {
         list.lastElementChild.remove();
@@ -16,7 +20,6 @@ const createListItems = () => {
     case ' ':
       return createListItems();
     case 'exit':
-    case null:
       return;
     default:
       list.insertAdjacentHTML('beforeend', `<li>${userPromt}</li>`);
