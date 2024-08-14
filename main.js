@@ -5,6 +5,11 @@ const modalForm = document.querySelector('.modal__form');
 const discountCheckbox = document.querySelector('.form__checkbox');
 const discountInput = document.querySelector('#discount');
 const totalPrice = document.querySelector('.amount__number');
+const modalOpen = document.querySelector('.cms__header-modal');
+const modal = document.querySelector('.modal');
+const modalClose = document.querySelector('.modal__btn');
+const modalBody = document.querySelector('.modal__body');
+
 
 
 const createRow = item => {
@@ -42,4 +47,20 @@ const renderGoods = items => {
   items.map(createRow).forEach(row => tbody.append(row));
 };
 
+
+modalOpen.addEventListener('click', () => {
+  modal.classList.add('modal_display_flex');
+});
+
+modalClose.addEventListener('click', () => {
+  modal.classList.remove('modal_display_flex');
+});
+
+modalBody.addEventListener('click', event => {
+  event.stopPropagation();
+});
+
+modal.addEventListener('click', () => {
+  modal.classList.remove('modal_display_flex');
+});
 
