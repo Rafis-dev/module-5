@@ -7,8 +7,7 @@ const discountInput = document.querySelector('#discount');
 const totalPrice = document.querySelector('.amount__number');
 const modalOpen = document.querySelector('.cms__header-modal');
 const modal = document.querySelector('.modal');
-const modalClose = document.querySelector('.modal__btn');
-const modalBody = document.querySelector('.modal__body');
+const tbody = document.querySelector('.table__body');
 
 
 
@@ -27,12 +26,12 @@ const createRow = item => {
     <td class="table__body-data table__body-data_text_center">${'$' + item.price * item.count}</td>
     <td class="table__body-data table__body-buttons table__body-data_text_right">
       <button class="table__button" type="button">
-        <img class="table__button-img" src="assets/images/icons/image.svg" alt="иконка изображения">
+        <img class="table__button-img table__button_type_image" src="assets/images/icons/image.svg" alt="иконка изображения">
       </button>
-      <button class="table__button" type="button">
+      <button class="table__button table__button_type_edit" type="button">
         <img class="table__button-img" src="assets/images/icons/edit.svg" alt="иконка редактирования">
       </button>
-      <button class="table__button" type="button">
+      <button class="table__button table__button_type_de" type="button">
         <img class="table__button-img" src="assets/images/icons/delete.svg" alt="иконка корзины">
       </button>
     </td>
@@ -47,20 +46,21 @@ const renderGoods = items => {
   items.map(createRow).forEach(row => tbody.append(row));
 };
 
-
 modalOpen.addEventListener('click', () => {
   modal.classList.add('modal_display_flex');
 });
 
-modalClose.addEventListener('click', () => {
-  modal.classList.remove('modal_display_flex');
+modal.addEventListener('click', e => {
+  const target = e.target;
+  if (target === modal || target.closest('.modal__btn')) {
+    modal.classList.remove('modal_display_flex');
+  };
 });
 
-modalBody.addEventListener('click', event => {
-  event.stopPropagation();
-});
 
-modal.addEventListener('click', () => {
-  modal.classList.remove('modal_display_flex');
+tbody.addEventListener('click', e => {
+  const target = e.target;
+  if (target.closest('.table__button_type_del')) {
+    target.closest('.table__body-row').remove();
+  };
 });
-
