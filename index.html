@@ -320,7 +320,7 @@
 
       <div class="modal__title-wrapper">
         <h2 class="modal__title">Добавить ТОВАР</h2>
-        <span class="modal__id">id: 201910241</span>
+        <p class="modal__id">id: <span class="modal__id-value">201910241</span></p>
       </div>
       <button class="modal__btn" type="button">
         <span class="modal__btn-close modal__btn-close_line_first"></span>
@@ -333,45 +333,45 @@
 
           <div class="form__grid-name form__grid-item">
             <label class="form__label name-label" for="name">Наименование</label>
-            <input class="form__input form-name" type="text" name="name" id="name">
+            <input class="form__input form-name" type="text" name="title" id="name" required>
           </div>
 
           <div class="form__grid-category form__grid-item">
             <label class="form__label" for="category">Категория</label>
-            <input class="form__input" type="text" name="category" id="category">
+            <input class="form__input" type="text" name="category" id="category" required>
           </div>
 
           <div class="form__grid-unit form__grid-item">
             <label class="form__label" for="unit">Единицы измерения</label>
-            <input class="form__input" type="text" name="unit" id="unit">
+            <input class="form__input" type="text" name="units" id="unit" required>
           </div>
 
           <div class="form__grid-discount form__grid-item">
             <label class="form__label" for="discount">Дисконт</label>
             <div class="discount-box">
               <input class="form__checkbox" type="checkbox">
-              <input disabled class="form__input" type="number" name="discount" id="discount">
+              <input disabled class="form__input" type="number" name="discont" id="discount">
             </div>
           </div>
 
           <div class="form__grid-descr form__grid-item">
             <label class="form__label" for="descr">Описание</label>
-            <textarea class="form__input form__input_textarea_descr" name="descr" id="descr"></textarea>
+            <textarea class="form__input form__input_textarea_descr" name="description" id="descr" required></textarea>
           </div>
 
           <div class="form__grid-quantity form__grid-item">
             <label class="form__label" for="quantity">Количество</label>
-            <input class="form__input" type="number" name="quantity" id="quantity">
+            <input class="form__input" type="number" name="count" id="quantity" required>
           </div>
 
           <div class="form__grid-price form__grid-item">
             <label class="form__label" for="price">Цена</label>
-            <input class="form__input" type="number" name="price" id="price">
+            <input class="form__input" type="number" name="price" id="price" required>
           </div>
 
           <div class="form__grid-file form__grid-item">
             <label class="form__label form__label_type_file" for="file">Добавить изображение</label>
-            <input class="form__input visually-hidden" type="file" name="file" id="file" accept="image/*">
+            <input class="form__input visually-hidden" type="file" name="images" id="file" accept="image/*">
           </div>
         </fieldset>
 

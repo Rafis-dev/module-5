@@ -8,6 +8,11 @@ const totalPrice = document.querySelector('.amount__number');
 const modalOpen = document.querySelector('.cms__header-modal');
 const modal = document.querySelector('.modal');
 const tbody = document.querySelector('.table__body');
+const formInput = modalForm.querySelector('.form__input');
+const priceInput = modalForm.querySelector('#price');
+const totalQuantityModal = modalForm.querySelector('#quantity');
+const totalPriceModal = modalForm.querySelector('.amount__number');
+const modalIdValue = document.querySelector('.modal__id-value');
 
 let goods = [
   {
@@ -68,6 +73,24 @@ let goods = [
   },
 ];
 
+// Высчитываем общую сумму всех товаров в таблице в объекте goods
+const totalSum = items => {
+  let sum = 0;
+  items.forEach(item => {
+    sum += item.price * item.count;
+  });
+  totalPrice.textContent = `$ ${sum}`;
+};
+// Генерируем случайный ID длиной количестdом символов length
+const generateId = length => {
+  const characters = '0123456789';
+  let result = '';
+  for (let i = 0; i < length; i++) {
+    result += characters[Math.floor(Math.random() * characters.length)];
+  }
+  return result;
+};
+// Создаем новую строчку в таблице и вызываем ф-ию totalSum
 const createRow = item => {
   const row = document.createElement('tr');
   row.classList.add('table__body-row');
@@ -93,30 +116,19 @@ const createRow = item => {
       </button>
     </td>
 `;
+  totalSum(goods);
   return row;
 };
 
-const renderGoods = items => {
-  const tbody = document.querySelector('.table__body');
 
+const renderGoods = items => {
   tbody.innerHTML = '';
   items.map(createRow).forEach(row => tbody.append(row));
 };
 
 renderGoods(goods);
 
-modalOpen.addEventListener('click', () => {
-  modal.classList.add('modal_display_flex');
-});
-
-modal.addEventListener('click', e => {
-  const target = e.target;
-  if (target === modal || target.closest('.modal__btn')) {
-    modal.classList.remove('modal_display_flex');
-  };
-});
-
-
+// Удаляем строчки
 tbody.addEventListener('click', e => {
   const target = e.target;
   if (target.closest('.table__button_type_del')) {
@@ -129,3 +141,43 @@ tbody.addEventListener('click', e => {
     console.log(goods);
   };
 });
+// Открываем  модалку, устанавливаем общую стоимость на 0, генерим новый id при открытии модалки
+modalOpen.addEventListener('click', () => {
+  modal.classList.add('modal_display_flex');
+  totalPriceModal.textContent = '$ 0';
+  modalIdValue.textContent = generateId(9);
+});
+// Закрываем  модалку, очищаем форму
+modal.addEventListener('click', e => {
+  const target = e.target;
+  if (target === modal || target.closest('.modal__btn')) {
+    modalForm.reset();
+    modal.classList.remove('modal_display_flex');
+  };
+});
+
+// Считаем общую стоимость внутри формы
+priceInput.addEventListener('change', e => {
+  totalPriceModal.textContent = `$ ${priceInput.value * totalQuantityModal.value}`;
+});
+
+// Клик на чекбокс
+discountCheckbox.addEventListener('click', () => {
+  discountInput.toggleAttribute('disabled');
+});
+
+// Работа с формой
+modalForm.addEventListener('submit', e => {
+  e.preventDefault();
+
+  const formData = new FormData(e.target);
+  const newProduct = Object.fromEntries(formData);
+  newProduct.id = +modalIdValue.textContent;
+  goods.push(newProduct);
+  tbody.append(createRow(newProduct));
+  console.log(goods);
+  modalForm.reset();
+  modal.classList.remove('modal_display_flex');
+});
+
+
