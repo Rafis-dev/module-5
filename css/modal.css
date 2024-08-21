@@ -222,7 +222,8 @@
 
 }
 
-.amount__number {
+.amount__number,
+.amount__number-dollar {
   font-weight: 700;
   font-size: 18px;
   color: #6d5bd0;
