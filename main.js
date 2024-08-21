@@ -184,7 +184,7 @@ discountCheckbox.addEventListener('click', () => {
   }
 });
 
-// Работа с формоq
+// Работа с формой
 modalForm.addEventListener('submit', e => {
   e.preventDefault();
 
