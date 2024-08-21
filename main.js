@@ -13,6 +13,7 @@ const priceInput = modalForm.querySelector('#price');
 const totalQuantityModal = modalForm.querySelector('#quantity');
 const totalPriceModal = modalForm.querySelector('.amount__number');
 const modalIdValue = document.querySelector('.modal__id-value');
+let discountPrice;
 
 let goods = [
   {
@@ -81,7 +82,7 @@ const totalSum = items => {
   });
   totalPrice.textContent = `$ ${sum}`;
 };
-// Генерируем случайный ID длиной количестdом символов length
+// Генерируем случайный ID длиной количеством символов length
 const generateId = length => {
   const characters = '0123456789';
   let result = '';
@@ -120,6 +121,13 @@ const createRow = item => {
   return row;
 };
 
+// Очищаем форму, поле со скидкой, закрываем форму
+const closeReset = () => {
+  modalForm.reset();
+  discountInput.setAttribute('disabled', '');
+  modal.classList.remove('modal_display_flex');
+};
+
 
 const renderGoods = items => {
   tbody.innerHTML = '';
@@ -141,29 +149,39 @@ tbody.addEventListener('click', e => {
     console.log(goods);
   };
 });
+
 // Открываем  модалку, устанавливаем общую стоимость на 0, генерим новый id при открытии модалки
 modalOpen.addEventListener('click', () => {
   modal.classList.add('modal_display_flex');
-  totalPriceModal.textContent = '$ 0';
+  totalPriceModal.textContent = '0';
   modalIdValue.textContent = generateId(9);
 });
+
 // Закрываем  модалку, очищаем форму
 modal.addEventListener('click', e => {
   const target = e.target;
   if (target === modal || target.closest('.modal__btn')) {
-    modalForm.reset();
-    modal.classList.remove('modal_display_flex');
+    closeReset();
   };
 });
 
-// Считаем общую стоимость внутри формы
-priceInput.addEventListener('change', e => {
-  totalPriceModal.textContent = `$ ${priceInput.value * totalQuantityModal.value}`;
+// Считаем общую стоимость внутри формы с учетом скидки
+modalForm.addEventListener('change', e => {
+  const target = e.target;
+  if (target === priceInput || target === discountInput ||
+    target === totalQuantityModal || target === discountCheckbox) {
+    discountPrice = (priceInput.value - (discountInput.value / 100 * priceInput.value));
+    totalPriceModal.textContent = (discountPrice * totalQuantityModal.value).toFixed(2);
+  }
 });
 
 // Клик на чекбокс
 discountCheckbox.addEventListener('click', () => {
   discountInput.toggleAttribute('disabled');
+  // для поля со скидкой с атрибутом disabled очищаем значение
+  if (discountInput.hasAttribute('disabled')) {
+    discountInput.value = '';
+  }
 });
 
 // Работа с формой
@@ -173,11 +191,9 @@ modalForm.addEventListener('submit', e => {
   const formData = new FormData(e.target);
   const newProduct = Object.fromEntries(formData);
   newProduct.id = +modalIdValue.textContent;
+  newProduct.price = +discountPrice;
   goods.push(newProduct);
   tbody.append(createRow(newProduct));
   console.log(goods);
-  modalForm.reset();
-  modal.classList.remove('modal_display_flex');
+  closeReset();
 });
-
-
