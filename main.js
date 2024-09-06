@@ -4,7 +4,7 @@ import {data} from './modules/variables.js';
 import modalFormData from './modules/modalForm.js';
 
 const {openModal, closeModal} = modalControl;
-const {renderGoods, removeRows} = render;
+const {renderGoods, removeRows, showPic} = render;
 const {modalTotalPrice, modalCheckbox, sendModalData} = modalFormData;
 
 
@@ -12,6 +12,7 @@ const start = () => {
   renderGoods(data.goods);
 
   removeRows();
+  showPic();
 
   openModal();
   closeModal();

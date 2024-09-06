@@ -25,7 +25,7 @@ export const createRow = (item) => {
     }</td>
     <td class="table__body-data table__body-data_text_center">${'$' + item.price * item.count}</td>
     <td class="table__body-data table__body-buttons table__body-data_text_right">
-      <button class="table__button table__button_type_image" type="button">
+      <button class="table__button table__button_type_image" type="button"  data-pic="https://placehold.co/580x580/jpg?text=Hello+World">
         <img class="table__button-img" src="assets/images/icons/image.svg" alt="иконка изображения">
       </button>
       <button class="table__button table__button_type_edit" type="button">
