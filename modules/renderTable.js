@@ -1,10 +1,25 @@
 import {tbody} from './variables.js';
 import {createRow} from './createTable.js';
-import {data} from './variables.js';
+import {promo} from './variables.js';
+import {totalPrice} from './variables.js';
 
-const renderGoods = items => {
+// Высчитываем общую сумму всех товаров в таблице
+const totalSum = items => {
+  let sum = 0;
+  items.forEach(item => {
+    sum += item.price * item.count;
+  });
+  totalPrice.textContent = `$ ${sum}`;
+};
+
+// рендерим данные с сервера
+// result будет объектом с массивом внутри, а не массивом изначально
+const renderGoods = async (url) => {
+  const data = await fetch(url);
+  const result = await data.json();
   tbody.innerHTML = '';
-  items.map(createRow).forEach(row => tbody.append(row));
+  result.map(createRow).forEach(row => tbody.append(row));
+  totalSum(result);
 };
 // Удаляем строчки
 const removeRows = () => {
@@ -43,3 +58,4 @@ export default {
   removeRows,
   showPic,
 };
+

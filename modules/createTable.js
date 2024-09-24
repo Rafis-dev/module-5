@@ -1,15 +1,3 @@
-import {totalPrice} from './variables.js';
-import {data} from './variables.js';
-
-// Высчитываем общую сумму всех товаров в таблице в объекте goods
-const totalSum = items => {
-  let sum = 0;
-  items.forEach(item => {
-    sum += item.price * item.count;
-  });
-  totalPrice.textContent = `$ ${sum}`;
-};
-
 // Создаем новую строчку в таблице и вызываем ф-ию totalSum
 export const createRow = (item) => {
   const row = document.createElement('tr');
@@ -36,11 +24,9 @@ export const createRow = (item) => {
       </button>
     </td>
 `;
-  totalSum(data.goods);
   return row;
 };
 
 export default {
-  totalSum,
   createRow,
 };
