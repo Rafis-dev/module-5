@@ -238,6 +238,70 @@
   padding: 0 28px;
 }
 
+.modal__error-wrapper {
+  inset: 0;
+  position: fixed;
+  display: none;
+}
+
+.modal__error_display_flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal__error-body {
+  position: relative;
+  margin: auto;
+  text-align: center;
+  max-width: 350px;
+  width: 100%;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.25);
+  background: #f2f0f9;
+  padding: 109px 0 96px 0;
+}
+
+.modal__error-description {
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6e6893;
+}
+
+.modal__error-img {
+  margin-bottom: 33px;
+}
+
+.modal__error-btn {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 20px;
+  right: 30px;
+}
+
+.modal__error-btn-close {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  right: 0;
+  background-color: #6E6893;
+}
+
+.modal__error-btn-close_line_first {
+  transform: rotate(-45deg);
+}
+
+.modal__error-btn-close_line_second {
+  transform: rotate(45deg);
+}
+
+.modal__error-message {
+  color: red;
+  margin-top: 20px;
+}
+
 @media (max-width: 940px) {
 
   .modal {

@@ -126,7 +126,7 @@
             <label class="form__label" for="discount">Дисконт</label>
             <div class="discount-box">
               <input class="form__checkbox" type="checkbox">
-              <input disabled class="form__input" type="number" min="0" max="100" name="discont" id="discount">
+              <input disabled class="form__input" type="number" min="0" max="100" name="discount" id="discount">
             </div>
           </div>
 
@@ -159,6 +159,17 @@
         </div>
       </form>
 
+    </div>
+    <div class="modal__error-wrapper">
+      <div class="modal__error-body">
+        <button type="buttton" class="modal__error-btn">
+          <span class="modal__error-btn-close modal__error-btn-close_line_first"></span>
+          <span class="modal__error-btn-close modal__error-btn-close_line_second"></span>
+        </button>
+        <img class="modal__error-img" src="assets/images/icons/err.svg" alt="красный крестик">
+        <p class="modal__error-description">Что-то пошло не так</p>
+        <p class="modal__error-message"></p>
+      </div>
     </div>
   </div>
 </body>

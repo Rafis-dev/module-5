@@ -1,4 +1,7 @@
-import {modalOpen, modal, totalPriceModal, modalIdValue, discountInput, modalForm} from './variables.js';
+import {
+  modalOpen, modal, totalPriceModal, modalIdValue,
+  discountInput, modalForm, modalError,
+} from './variables.js';
 
 // Очищаем форму, поле со скидкой, закрываем форму
 export const closeReset = () => {
@@ -29,9 +32,23 @@ const closeModal = () => {
   });
 };
 
+// Закрываем  окно с ошибкой
+const closeErrorModal = () => {
+  modalError.addEventListener('click', e => {
+    const target = e.target;
+    if (target.closest('.modal__error-btn')) {
+      modalError.classList.remove('modal__error_display_flex');
+    };
+    if (target === modalError) {
+      modalError.classList.remove('modal__error_display_flex');
+    }
+  });
+};
+
 export default {
   openModal,
   closeModal,
   closeReset,
+  closeErrorModal,
 };
 

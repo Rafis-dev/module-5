@@ -1,17 +1,20 @@
 import render from './modules/renderTable.js';
 import modalControl from './modules/modalControl.js';
 import modalFormData from './modules/modalForm.js';
-const URL = 'https://cat-rainbow-babcat.glitch.me/api/goods?size=all';
+const getPostURL = 'https://cat-rainbow-babcat.glitch.me/api/goods?size=all';
+const deleteURL = 'https://cat-rainbow-babcat.glitch.me/api/goods/';
 
-const {openModal, closeModal} = modalControl;
+const {openModal, closeModal, closeErrorModal} = modalControl;
 const {renderGoods, removeRows, showPic} = render;
 const {modalTotalPrice, modalCheckbox, sendModalData} = modalFormData;
 
 
 const start = () => {
-  renderGoods(URL);
+  renderGoods(getPostURL);
 
-  removeRows();
+  removeRows(deleteURL, () => {
+    renderGoods(getPostURL);
+  });
   showPic();
 
   openModal();
@@ -19,7 +22,9 @@ const start = () => {
 
   modalTotalPrice();
   modalCheckbox();
-  sendModalData(URL, renderGoods);
+  closeErrorModal();
+  sendModalData(getPostURL, renderGoods);
 };
 start();
+
 

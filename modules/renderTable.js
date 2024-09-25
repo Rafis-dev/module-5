@@ -1,6 +1,5 @@
 import {tbody} from './variables.js';
 import {createRow} from './createTable.js';
-import {promo} from './variables.js';
 import {totalPrice} from './variables.js';
 
 // Высчитываем общую сумму всех товаров в таблице
@@ -13,7 +12,8 @@ const totalSum = items => {
 };
 
 // рендерим данные с сервера
-// result будет объектом с массивом внутри, а не массивом изначально
+// result будет объектом с массивом внутри, а не массивом изначально,
+// если вызывать запрос не всех товаров сразу
 const renderGoods = async (url) => {
   const data = await fetch(url);
   const result = await data.json();
@@ -22,17 +22,17 @@ const renderGoods = async (url) => {
   totalSum(result);
 };
 // Удаляем строчки
-const removeRows = () => {
-  tbody.addEventListener('click', e => {
+const removeRows = (url, cb) => {
+  tbody.addEventListener('click', async (e) => {
     const target = e.target;
     if (target.closest('.table__button_type_del')) {
       const row = target.closest('.table__body-row');
-      const id = Number(row.children[0].textContent);
+      const id = row.children[0].textContent;
 
-      data.goods = data.goods.filter(item => item.id !== id);
-
-      renderGoods(data.goods);
-      console.log(data.goods);
+      await fetch(url + id, {
+        method: 'DELETE',
+      });
+      cb(url);
     };
   });
 };
@@ -47,7 +47,9 @@ const showPic = () => {
     winImage.src = imgUrl;
     if (imgBtn) {
       // Открываем новое окно по центру экрана
-      const win = open('about:blank', '', `width=600, height=600, top=${(screen.height - 600) / 2}, left=${(screen.width - 600) / 2}`);
+      const win = open('about:blank', '', `width=600, height=600, 
+        top=${(screen.height - 600) / 2}, 
+        left=${(screen.width - 600) / 2}`);
       win.document.body.append(winImage);
     };
   });
