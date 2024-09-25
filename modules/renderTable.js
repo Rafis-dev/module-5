@@ -42,16 +42,18 @@ const showPic = () => {
   tbody.addEventListener('click', e => {
     const target = e.target;
     const imgBtn = target.closest('.table__button_type_image');
-    const imgUrl = imgBtn.dataset.pic;
-    const winImage = document.createElement('img');
-    winImage.src = imgUrl;
+
     if (imgBtn) {
+      const imgUrl = imgBtn.dataset.pic;
+      const winImage = document.createElement('img');
+      winImage.src = imgUrl;
+
       // Открываем новое окно по центру экрана
       const win = open('about:blank', '', `width=600, height=600, 
         top=${(screen.height - 600) / 2}, 
         left=${(screen.width - 600) / 2}`);
       win.document.body.append(winImage);
-    };
+    }
   });
 };
 
