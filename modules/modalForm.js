@@ -77,7 +77,7 @@ const editGood = (url, cb) => {
 
       modalForm.reset();
       // Открываем модальное окно
-      modal.classList.add('modal_display_flex');
+      modal.classList.add('modal-edit_display_flex');
 
       // Заполняем поля формы данными с сервера
       modalForm.title.value = response.title;

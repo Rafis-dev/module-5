@@ -8,6 +8,7 @@ export const closeReset = () => {
   modalForm.reset();
   discountInput.setAttribute('disabled', '');
   modal.classList.remove('modal_display_flex');
+  modal.classList.remove('modal-edit_display_flex');
 };
 
 // Открываем  модалку, устанавливаем общую стоимость на 0
@@ -25,6 +26,13 @@ const closeModal = () => {
     if (target.closest('.modal__btn')) {
       closeReset();
     };
+
+    if (target === modal) {
+      if (modal.classList.contains('modal-edit_display_flex')) {
+        closeReset();
+      }
+    }
+
     if (target === modal) {
       discountInput.setAttribute('disabled', '');
       modal.classList.remove('modal_display_flex');

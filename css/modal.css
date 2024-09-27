@@ -6,7 +6,8 @@
   overflow-y: auto;
 }
 
-.modal_display_flex {
+.modal_display_flex,
+.modal-edit_display_flex {
   display: flex;
   align-items: center;
   justify-content: center;
