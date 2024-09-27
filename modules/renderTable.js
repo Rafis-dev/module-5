@@ -29,7 +29,7 @@ const removeRows = (url, cb) => {
       const row = target.closest('.table__body-row');
       const id = row.children[0].textContent;
 
-      await fetch(url + id, {
+      await fetch(`${url}${id}`, {
         method: 'DELETE',
       });
       cb(url);
@@ -56,6 +56,7 @@ const showPic = () => {
     }
   });
 };
+
 
 export default {
   renderGoods,

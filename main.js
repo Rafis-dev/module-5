@@ -4,9 +4,10 @@ import modalFormData from './modules/modalForm.js';
 const getPostURL = 'https://cat-rainbow-babcat.glitch.me/api/goods?size=all';
 const deleteURL = 'https://cat-rainbow-babcat.glitch.me/api/goods/';
 
+
 const {openModal, closeModal, closeErrorModal} = modalControl;
 const {renderGoods, removeRows, showPic} = render;
-const {modalTotalPrice, modalCheckbox, sendModalData} = modalFormData;
+const {modalTotalPrice, modalCheckbox, sendModalData, editGood} = modalFormData;
 
 
 const start = () => {
@@ -23,6 +24,9 @@ const start = () => {
   modalTotalPrice();
   modalCheckbox();
   closeErrorModal();
+  editGood(deleteURL, () => {
+    renderGoods(getPostURL);
+  });
   sendModalData(getPostURL, renderGoods);
 };
 start();

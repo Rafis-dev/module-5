@@ -14,7 +14,8 @@ export const priceInput = modalForm.querySelector('#price');
 export const totalQuantityModal = modalForm.querySelector('#quantity');
 export const totalPriceModal = modalForm.querySelector('.amount__number');
 export const modalIdValue = document.querySelector('.modal__id-value');
-export const errorMessageElement = document.querySelector('.modal__error-message');
+export const errorMessageElement =
+  document.querySelector('.modal__error-message');
 let discountPrice;
 
 

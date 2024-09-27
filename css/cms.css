@@ -2,7 +2,6 @@
   padding: 50px 0;
   max-width: 1100px;
   margin: 0 auto;
-
 }
 
 .cms__title {
@@ -106,7 +105,14 @@
   border-collapse: collapse;
 }
 
+.table__button {
+  width: 20px;
+  font-size: 0;
+}
 
+.table__body-row {
+  vertical-align: middle;
+}
 
 .table__head-row,
 .table__body-row:not(:last-child) {
