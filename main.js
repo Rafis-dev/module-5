@@ -1,13 +1,15 @@
 import render from './modules/renderTable.js';
-import modalControl from './modules/modalControl.js';
-import modalFormData from './modules/modalForm.js';
+// import modalControl from './modules/modalControl.js';
+// import modalFormData from './modules/modalForm.js';
+import showModal from './modules/generateModal.js';
+
 const getPostURL = 'https://cat-rainbow-babcat.glitch.me/api/goods?size=all';
 const deleteURL = 'https://cat-rainbow-babcat.glitch.me/api/goods/';
 
 
-const {openModal, closeModal, closeErrorModal} = modalControl;
+// const {openModal, closeModal, closeErrorModal} = modalControl;
 const {renderGoods, removeRows, showPic} = render;
-const {modalTotalPrice, modalCheckbox, sendModalData, editGood} = modalFormData;
+// const {modalTotalPrice, modalCheckbox, sendModalData, editGood} = modalFormData;
 
 
 const start = () => {
@@ -18,16 +20,20 @@ const start = () => {
   });
   showPic();
 
-  openModal();
-  closeModal();
+  showModal();
 
-  modalTotalPrice();
-  modalCheckbox();
-  closeErrorModal();
-  editGood(deleteURL, () => {
-    renderGoods(getPostURL);
-  });
-  sendModalData(getPostURL, renderGoods);
+  // openModal();
+  // closeModal();
+
+  // modalTotalPrice();
+  // modalCheckbox();
+  // closeErrorModal();
+
+
+  // editGood(deleteURL, () => {
+  //   renderGoods(getPostURL);
+  // });
+  // sendModalData(getPostURL, renderGoods);
 };
 start();
 

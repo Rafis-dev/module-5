@@ -1,6 +1,6 @@
 import {tbody} from './variables.js';
 import {createRow} from './createTable.js';
-import {totalPrice} from './variables.js';
+// import {totalPrice} from './variables.js';
 
 // Высчитываем общую сумму всех товаров в таблице
 const totalSum = items => {
@@ -8,7 +8,7 @@ const totalSum = items => {
   items.forEach(item => {
     sum += item.price * item.count;
   });
-  totalPrice.textContent = `$ ${sum}`;
+  // totalPrice.textContent = `$ ${sum}`;
 };
 
 // рендерим данные с сервера

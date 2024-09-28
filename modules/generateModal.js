@@ -1,99 +1,9 @@
-<!DOCTYPE html>
-<html lang="ru">
+const modalOpen = document.querySelector('.cms__header-modal');
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/style.css">
-  <script type="module" src="main.js"></script>
-
-  <title>CMS</title>
-</head>
-
-<body>
-  <div class="cms">
-    <div class="cms__title-wrapper">
-      <h1 class="cms__title">CMS</h1>
-      <p class="amount">Итоговая стоимость: <span class="amount__number">$
-          900.00</span></p>
-    </div>
-
-    <div class="cms__content-wrapper">
-
-      <div class="cms__header">
-
-        <button class="cms__header-filter">Фильтр</button>
-
-        <form class="cms__header-form" action="#">
-          <button class="cms__header-button" type="button"></button>
-          <input class="cms__header-search" type="text" placeholder="Поиск по наименованию и категории">
-        </form>
-
-        <button class="cms__header-modal" type="button">Добавить товар</button>
-      </div>
-
-      <div class="table-wrapper">
-
-        <table class="cms__table table">
-
-          <thead class="table__head">
-            <tr class="table__head-row">
-              <th class="table__head-cell">ID</th>
-              <th class="table__head-cell">Наименование</th>
-              <th class="table__head-cell">Категория</th>
-              <th class="table__head-cell table__head-cell_text_center">ед/изм</th>
-              <th class="table__head-cell table__head-cell_text_center">количество</th>
-              <th class="table__head-cell table__head-cell_text_center">цена</th>
-              <th class="table__head-cell table__head-cell_text_center">ИТОГ</th>
-              <th class="table__head-cell">
-                <p class="visually-hidden">Управление таблицей</p>
-              </th>
-            </tr>
-          </thead>
-
-          <tbody class="table__body">
-
-          </tbody>
-
-        </table>
-
-      </div>
-
-      <div class="cms__footer">
-
-        <div class="cms__footer-select">
-          <label class="cms__select-label" for="item-quantity">Показывать на странице:</label>
-          <select class="cms__select" name="item-quantity" id="item-quantity">
-            <option class="cms__select-option" value="10" selected>10</option>
-            <option class="cms__select-option" value="20">20</option>
-            <option class="cms__select-option" value="30">30</option>
-            <option class="cms__select-option" value="40">40</option>
-          </select>
-        </div>
-
-        <p class="cms__footer-quantity">
-          1-10 of <span class="cms__footer-total">276</span>
-        </p>
-
-        <div class="cms__footer-arrows">
-          <button class="cms__button-left" type="button">
-            <img class="cms__arow-left" src="assets/images/icons/arrow-left.svg" alt="стрелка влево">
-          </button>
-          <button class="cms__button-right" type="button">
-            <img class="cms__arow-right" src="assets/images/icons/arrow-right.svg" alt="стрелка вправо">
-          </button>
-        </div>
-
-
-      </div>
-    </div>
-  </div>
-
-  <!-- <div class="modal">
+const createModal = () => {
+  const overlay = document.createElement('div');
+  overlay.className = 'modal';
+  overlay.innerHTML = `
     <div class="modal__body">
 
       <div class="modal__title-wrapper">
@@ -173,7 +83,21 @@
         <p class="modal__error-message"></p>
       </div>
     </div>
-  </div> -->
-</body>
+    `;
+  document.body.append(overlay);
+};
 
-</html>
+
+const showModal = () => {
+  modalOpen.addEventListener('click', async () => {
+
+
+
+
+  });
+
+};
+
+
+
+export default showModal;
