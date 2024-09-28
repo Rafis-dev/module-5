@@ -11,6 +11,7 @@ export const modalError = document.querySelector('.modal__error-wrapper');
 export const tbody = document.querySelector('.table__body');
 const formInput = modalForm.querySelector('.form__input');
 export const priceInput = modalForm.querySelector('#price');
+export const modalFormBtn = modalForm.querySelector('.form__button');
 export const totalQuantityModal = modalForm.querySelector('#quantity');
 export const totalPriceModal = modalForm.querySelector('.amount__number');
 export const modalIdValue = document.querySelector('.modal__id-value');
@@ -35,6 +36,7 @@ export default {
   totalQuantityModal,
   totalPriceModal,
   modalIdValue,
+  modalFormBtn,
 };
 
 export const promo = {

@@ -1,6 +1,7 @@
 import {
   modalForm, priceInput, discountInput, totalQuantityModal, discountCheckbox,
   totalPriceModal, modalError, errorMessageElement, tbody, modal, modalIdValue,
+  modalFormBtn,
 } from './variables.js';
 import {promo} from './variables.js';
 import {closeReset} from './modalControl.js';
@@ -37,7 +38,7 @@ const sendModalData = (url, cb) => {
     errorMessageElement.textContent = '';
     const formData = new FormData(e.target);
     const newProduct = Object.fromEntries(formData);
-    newProduct.price = +promo.discountPrice;
+    // newProduct.price = +promo.discountPrice;
 
     try {
       const response = await fetch(url, {
@@ -78,6 +79,7 @@ const editGood = (url, cb) => {
       modalForm.reset();
       // Открываем модальное окно
       modal.classList.add('modal-edit_display_flex');
+      modalFormBtn.textContent = 'Изменить товар';
 
       // Заполняем поля формы данными с сервера
       modalForm.title.value = response.title;
@@ -96,8 +98,11 @@ const editGood = (url, cb) => {
         discountCheckbox.checked = false;
         modalForm.discount.setAttribute('disabled', '');
       }
+
       totalPriceModal.textContent = (response.count *
-        response.price).toFixed(2);
+        response.price) -
+        (response.count * response.price / 100 * response.discount).toFixed(2);
+
 
       // Добавляем обработчик на отправку формы
       modalForm.addEventListener('submit', async (e) => {

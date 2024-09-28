@@ -1,6 +1,7 @@
 import {
   modalOpen, modal, totalPriceModal, modalIdValue,
   discountInput, modalForm, modalError,
+  modalFormBtn,
 } from './variables.js';
 
 // Очищаем форму, поле со скидкой, закрываем форму
@@ -17,6 +18,7 @@ const openModal = () => {
     modal.classList.add('modal_display_flex');
     totalPriceModal.textContent = '0';
     modalIdValue.textContent = '';
+    modalFormBtn.textContent = 'Добавить товар';
   });
 };
 // Закрываем  модалку, очищаем форму. При клике не на крестик, форму не очищаем
