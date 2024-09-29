@@ -107,10 +107,6 @@ const editGood = (url, createModal, cb) => {
       modalForm.reset();
       modalFormBtn.textContent = 'Изменить товар';
 
-
-      modalCheckbox();
-
-
       // Заполняем поля формы данными с сервера
       modalForm.title.value = response.title;
       modalForm.category.value = response.category;
@@ -133,6 +129,7 @@ const editGood = (url, createModal, cb) => {
         response.price) -
         (response.count * response.price / 100 * response.discount)).toFixed(2);
 
+      modalCheckbox();
       modalTotalPrice();
       closeErrorModal();
       closeModal();
