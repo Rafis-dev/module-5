@@ -99,8 +99,9 @@ export const showModal = (url, cb) => {
   modalOpen.addEventListener('click', async () => {
     await loadModalStyles('./css/modal.css');
     createModal();
-    modalTotalPrice();
     modalCheckbox();
+
+    modalTotalPrice();
     sendModalData(url, cb);
     closeErrorModal();
     closeModal();

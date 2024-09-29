@@ -1,9 +1,11 @@
-const styles = new Set();
+const styles = new Map();
 
-export const loadModalStyles = (url, callback) => {
-  if (styles.has(url)) return;
+export const loadModalStyles = (url) => {
+  if (styles.has(url)) {
+    return styles.get(url);
+  };
 
-  return new Promise((resolve) => {
+  const stylePromise = new Promise((resolve) => {
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = url;
@@ -11,8 +13,9 @@ export const loadModalStyles = (url, callback) => {
       resolve();
     });
     document.head.append(link);
-    styles.add(url);
   });
+  styles.set(url, stylePromise);
+  return stylePromise;
 };
 
 

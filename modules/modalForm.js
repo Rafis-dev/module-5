@@ -3,40 +3,50 @@ import {closeReset} from './modalControl.js';
 import modalControl from './modalControl.js';
 import {loadModalStyles} from './loadModalStyles.js';
 const {closeModal, closeErrorModal} = modalControl;
+
+
+//Обработчик для подсчета общей стоимости товара 
+// в форме модального окна
+const handleChange = (e) => {
+  const target = e.target;
+  const priceInput = document.querySelector('#price');
+  const discountInput = document.querySelector('#discount');
+  const totalQuantityModal = document.querySelector('#quantity');
+  const discountCheckbox = document.querySelector('.form__checkbox');
+  let discountPrice;
+  const totalPriceModal = document.querySelector('.amount__number-modal');
+  if (target === priceInput || target === discountInput ||
+    target === totalQuantityModal || target === discountCheckbox) {
+    discountPrice = (priceInput.value - (discountInput.value /
+      100 * priceInput.value));
+    totalPriceModal.textContent = (discountPrice *
+      totalQuantityModal.value).toFixed(2);
+  }
+};
 // Считаем общую стоимость внутри формы с учетом скидки
 const modalTotalPrice = () => {
-  document.addEventListener('change', e => {
-    const target = e.target;
-    const priceInput = document.querySelector('#price');
-    const discountInput = document.querySelector('#discount');
-    const totalQuantityModal = document.querySelector('#quantity');
-    const discountCheckbox = document.querySelector('.form__checkbox');
-    let discountPrice;
-    const totalPriceModal = document.querySelector('.amount__number-modal');
-    if (target === priceInput || target === discountInput ||
-      target === totalQuantityModal || target === discountCheckbox) {
-      discountPrice = (priceInput.value - (discountInput.value /
-        100 * priceInput.value));
-      totalPriceModal.textContent = (discountPrice *
-        totalQuantityModal.value).toFixed(2);
-    }
-  });
+  document.removeEventListener('change', handleChange);
+  document.addEventListener('change', handleChange);
 };
 
-// Клик на чекбокс
-const modalCheckbox = () => {
-  document.addEventListener('click', e => {
-    const discountCheckbox = document.querySelector('.form__checkbox');
-    const discountInput = document.querySelector('#discount');
-    const target = e.target;
-    if (target === discountCheckbox) {
-      discountInput.toggleAttribute('disabled');
-      // для поля со скидкой с атрибутом disabled очищаем значение
-      if (discountInput.hasAttribute('disabled')) {
-        discountInput.value = '';
-      }
+// Обработчик клика на чекбокс
+const handleCheckbox = (e) => {
+  const discountCheckbox = document.querySelector('.form__checkbox');
+  const discountInput = document.querySelector('#discount');
+  const target = e.target;
+  if (target === discountCheckbox) {
+    discountInput.toggleAttribute('disabled');
+    // для поля со скидкой с атрибутом disabled очищаем значение
+    if (discountInput.hasAttribute('disabled')) {
+      discountInput.value = '';
     }
-  });
+  }
+};
+
+// навешиваем клик на чекбокс
+const modalCheckbox = () => {
+  document.removeEventListener('click', handleCheckbox);
+  document.addEventListener('click', handleCheckbox);
 };
 
 // Работа с формой
