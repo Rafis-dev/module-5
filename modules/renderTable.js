@@ -1,26 +1,21 @@
 import {tbody} from './variables.js';
 import {createRow} from './createTable.js';
-// import {totalPrice} from './variables.js';
-
-// Высчитываем общую сумму всех товаров в таблице
-const totalSum = items => {
-  let sum = 0;
-  items.forEach(item => {
-    sum += item.price * item.count;
-  });
-  // totalPrice.textContent = `$ ${sum}`;
-};
+import {totalPrice} from './variables.js';
 
 // рендерим данные с сервера
+// Высчитываем общую сумму всех товаров в таблице
 // result будет объектом с массивом внутри, а не массивом изначально,
 // если вызывать запрос не всех товаров сразу
-const renderGoods = async (url) => {
+const renderGoods = async (url, totalPriceURL) => {
   const data = await fetch(url);
   const result = await data.json();
+  const totalPriceData = await fetch(totalPriceURL);
+  const totalPriceResult = await totalPriceData.json();
   tbody.innerHTML = '';
   result.map(createRow).forEach(row => tbody.append(row));
-  totalSum(result);
+  totalPrice.textContent = `$ ${totalPriceResult}`;
 };
+
 // Удаляем строчки
 const removeRows = (url, cb) => {
   tbody.addEventListener('click', async (e) => {

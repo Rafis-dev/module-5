@@ -1,40 +1,33 @@
 import render from './modules/renderTable.js';
-// import modalControl from './modules/modalControl.js';
-// import modalFormData from './modules/modalForm.js';
-import showModal from './modules/generateModal.js';
+import modalFormData from './modules/modalForm.js';
+import {showModal, createModal} from './modules/generateModal.js';
 
 const getPostURL = 'https://cat-rainbow-babcat.glitch.me/api/goods?size=all';
 const deleteURL = 'https://cat-rainbow-babcat.glitch.me/api/goods/';
+const totalPriceURL = 'https://cat-rainbow-babcat.glitch.me/api/total';
 
 
-// const {openModal, closeModal, closeErrorModal} = modalControl;
 const {renderGoods, removeRows, showPic} = render;
-// const {modalTotalPrice, modalCheckbox, sendModalData, editGood} = modalFormData;
+const {editGood} = modalFormData;
 
 
 const start = () => {
-  renderGoods(getPostURL);
+  renderGoods(getPostURL, totalPriceURL);
 
   removeRows(deleteURL, () => {
-    renderGoods(getPostURL);
+    renderGoods(getPostURL, totalPriceURL);
   });
+
   showPic();
 
-  showModal();
+  showModal(getPostURL, () => {
+    renderGoods(getPostURL, totalPriceURL);
+  });
 
-  // openModal();
-  // closeModal();
-
-  // modalTotalPrice();
-  // modalCheckbox();
-  // closeErrorModal();
-
-
-  // editGood(deleteURL, () => {
-  //   renderGoods(getPostURL);
-  // });
-  // sendModalData(getPostURL, renderGoods);
+  editGood(deleteURL, createModal, () => {
+    renderGoods(getPostURL, totalPriceURL);
+  });
 };
-start();
 
+start();
 

@@ -1,6 +1,12 @@
 const modalOpen = document.querySelector('.cms__header-modal');
+import {sendModalData} from './modalForm.js';
+import modalFormData from './modalForm.js';
+import modalControl from './modalControl.js';
+const {closeModal, closeErrorModal} = modalControl;
+const {modalTotalPrice, modalCheckbox} = modalFormData;
 
-const createModal = () => {
+// Генерим модальное окно
+export const createModal = () => {
   const overlay = document.createElement('div');
   overlay.className = 'modal';
   overlay.innerHTML = `
@@ -65,7 +71,7 @@ const createModal = () => {
 
         <div class="form__footer">
           <p class="amount">Итоговая стоимость: <span class="amount__number-dollar">$</span><span
-              class="amount__number">
+              class="amount__number-modal">
               0</span></p>
           <button class="form__button" type="submit">Добавить товар</button>
         </div>
@@ -87,17 +93,14 @@ const createModal = () => {
   document.body.append(overlay);
 };
 
-
-const showModal = () => {
+// Вызываем модальное окно по клику на кнопку
+export const showModal = (url, cb) => {
   modalOpen.addEventListener('click', async () => {
-
-
-
-
+    createModal();
+    modalTotalPrice();
+    modalCheckbox();
+    sendModalData(url, cb);
+    closeErrorModal();
+    closeModal();
   });
-
 };
-
-
-
-export default showModal;

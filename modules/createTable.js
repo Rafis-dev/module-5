@@ -33,6 +33,3 @@ export const createRow = (item) => {
   return row;
 };
 
-export default {
-  createRow,
-};

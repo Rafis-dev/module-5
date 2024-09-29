@@ -1,50 +1,34 @@
-import {
-  modalOpen, modal, totalPriceModal, modalIdValue,
-  discountInput, modalForm, modalError,
-  modalFormBtn,
-} from './variables.js';
-
 // Очищаем форму, поле со скидкой, закрываем форму
 export const closeReset = () => {
-  modalForm.reset();
+  const modalForm = document.querySelector('.modal__form');
+  const modal = document.querySelector('.modal');
+  const discountInput = document.querySelector('#discount');
   discountInput.setAttribute('disabled', '');
-  modal.classList.remove('modal_display_flex');
-  modal.classList.remove('modal-edit_display_flex');
+  modalForm.reset();
+  modal.remove();
 };
 
-// Открываем  модалку, устанавливаем общую стоимость на 0
-const openModal = () => {
-  modalOpen.addEventListener('click', () => {
-    modal.classList.add('modal_display_flex');
-    totalPriceModal.textContent = '0';
-    modalIdValue.textContent = '';
-    modalFormBtn.textContent = 'Добавить товар';
-  });
-};
-// Закрываем  модалку, очищаем форму. При клике не на крестик, форму не очищаем
+// Закрываем  модалку, очищаем форму
 const closeModal = () => {
-  modal.addEventListener('click', e => {
+  document.addEventListener('click', e => {
+    const modal = document.querySelector('.modal');
     const target = e.target;
     if (target.closest('.modal__btn')) {
       closeReset();
+      return;
     };
 
     if (target === modal) {
-      if (modal.classList.contains('modal-edit_display_flex')) {
-        closeReset();
-      }
-    }
-
-    if (target === modal) {
-      discountInput.setAttribute('disabled', '');
-      modal.classList.remove('modal_display_flex');
+      closeReset();
+      return;
     }
   });
 };
 
 // Закрываем  окно с ошибкой
 const closeErrorModal = () => {
-  modalError.addEventListener('click', e => {
+  document.addEventListener('click', e => {
+    const modalError = document.querySelector('.modal__error-wrapper');
     const target = e.target;
     if (target.closest('.modal__error-btn')) {
       modalError.classList.remove('modal__error_display_flex');
@@ -56,7 +40,6 @@ const closeErrorModal = () => {
 };
 
 export default {
-  openModal,
   closeModal,
   closeReset,
   closeErrorModal,
