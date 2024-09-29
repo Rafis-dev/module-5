@@ -2,6 +2,7 @@ const modalOpen = document.querySelector('.cms__header-modal');
 import {sendModalData} from './modalForm.js';
 import modalFormData from './modalForm.js';
 import modalControl from './modalControl.js';
+import {loadModalStyles} from './loadModalStyles.js';
 const {closeModal, closeErrorModal} = modalControl;
 const {modalTotalPrice, modalCheckbox} = modalFormData;
 
@@ -96,6 +97,7 @@ export const createModal = () => {
 // Вызываем модальное окно по клику на кнопку
 export const showModal = (url, cb) => {
   modalOpen.addEventListener('click', async () => {
+    await loadModalStyles('./css/modal.css');
     createModal();
     modalTotalPrice();
     modalCheckbox();

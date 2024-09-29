@@ -12,6 +12,18 @@
   color: #6e6893;
 }
 
+.amount {
+  font-weight: 500;
+  font-size: 14px;
+  color: #6e6893;
+}
+
+.amount__number {
+  font-weight: 700;
+  font-size: 18px;
+  color: #6d5bd0;
+}
+
 .cms__title-wrapper {
   padding: 0 20px;
   display: flex;

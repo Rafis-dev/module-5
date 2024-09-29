@@ -1,6 +1,8 @@
 import {tbody} from './variables.js';
 import {closeReset} from './modalControl.js';
-
+import modalControl from './modalControl.js';
+import {loadModalStyles} from './loadModalStyles.js';
+const {closeModal, closeErrorModal} = modalControl;
 // Считаем общую стоимость внутри формы с учетом скидки
 const modalTotalPrice = () => {
   document.addEventListener('change', e => {
@@ -88,7 +90,8 @@ const editGood = (url, createModal, cb) => {
       const id = row.children[0].textContent;
       const request = await fetch(`${url}${id}`);
       const response = await request.json();
-
+      // Подгружаем стили
+      await loadModalStyles('./css/modal.css');
       // Открываем модальное окно
       createModal();
       // Находим нужные данные
@@ -103,6 +106,10 @@ const editGood = (url, createModal, cb) => {
 
       modalForm.reset();
       modalFormBtn.textContent = 'Изменить товар';
+
+
+      modalCheckbox();
+
 
       // Заполняем поля формы данными с сервера
       modalForm.title.value = response.title;
@@ -122,13 +129,15 @@ const editGood = (url, createModal, cb) => {
         modalForm.discount.setAttribute('disabled', '');
       }
 
-      totalPriceModal.textContent = (response.count *
+      totalPriceModal.textContent = ((response.count *
         response.price) -
-        (response.count * response.price / 100 * response.discount).toFixed(2);
+        (response.count * response.price / 100 * response.discount)).toFixed(2);
 
+      modalTotalPrice();
+      closeErrorModal();
+      closeModal();
 
       // Добавляем обработчик на отправку формы
-
       modalForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
