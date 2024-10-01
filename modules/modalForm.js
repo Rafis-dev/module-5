@@ -54,7 +54,7 @@ const showPreview = () => {
   const file = document.querySelector('#file');
   const formFieldset = document.querySelector('.form__fieldset');
   const previewMessage = document.createElement('p');
-  previewMessage.className = 'preview-message';
+  previewMessage.className = 'preview__message';
   previewMessage.textContent = 'Изображение не должно превышать размер 1 Мб';
   const preview = document.createElement('div');
   preview.className = 'preview';
@@ -63,7 +63,7 @@ const showPreview = () => {
   preview.append(previewImg);
 
   file.addEventListener('change', () => {
-    const existingMessage = document.querySelector('.preview-message');
+    const existingMessage = document.querySelector('.preview__message');
     const existingPreview = document.querySelector('.preview');
 
     if (existingMessage) existingMessage.remove();
