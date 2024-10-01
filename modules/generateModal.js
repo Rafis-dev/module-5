@@ -4,7 +4,7 @@ import modalFormData from './modalForm.js';
 import modalControl from './modalControl.js';
 import {loadModalStyles} from './loadModalStyles.js';
 const {closeModal, closeErrorModal} = modalControl;
-const {modalTotalPrice, modalCheckbox} = modalFormData;
+const {modalTotalPrice, modalCheckbox, showPreview} = modalFormData;
 
 // Генерим модальное окно
 export const createModal = () => {
@@ -100,7 +100,7 @@ export const showModal = (url, cb) => {
     await loadModalStyles('./css/modal.css');
     createModal();
     modalCheckbox();
-
+    showPreview();
     modalTotalPrice();
     sendModalData(url, cb);
     closeErrorModal();

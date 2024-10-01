@@ -49,6 +49,44 @@ const modalCheckbox = () => {
   document.addEventListener('click', handleCheckbox);
 };
 
+// Превью изображения
+const showPreview = () => {
+  const file = document.querySelector('#file');
+  const formFieldset = document.querySelector('.form__fieldset');
+  const previewMessage = document.createElement('p');
+  previewMessage.className = 'preview-message';
+  previewMessage.textContent = 'Изображение не должно превышать размер 1 Мб';
+  const preview = document.createElement('div');
+  preview.className = 'preview';
+  const previewImg = document.createElement('img');
+  previewImg.className = 'preview__img';
+  preview.append(previewImg);
+
+  file.addEventListener('change', () => {
+    const existingMessage = document.querySelector('.preview-message');
+    const existingPreview = document.querySelector('.preview');
+
+    if (existingMessage) existingMessage.remove();
+    if (existingPreview) existingPreview.remove();
+
+    if (file.files.length > 0) {
+      if (file.files[0].size > (1024 ** 2)) {
+        formFieldset.append(previewMessage);
+        return;
+      } else {
+        const src = URL.createObjectURL(file.files[0]);
+        previewImg.src = src;
+        formFieldset.append(preview);
+        return;
+      }
+    }
+  });
+
+  preview.addEventListener('click', () => {
+    preview.remove();
+  });
+};
+
 // Работа с формой
 export const sendModalData = (url, cb) => {
   document.addEventListener('submit', async (e) => {
@@ -141,6 +179,7 @@ const editGood = (url, createModal, cb) => {
 
       modalCheckbox();
       modalTotalPrice();
+      showPreview();
       closeErrorModal();
       closeModal();
 
@@ -195,4 +234,5 @@ export default {
   modalCheckbox,
   sendModalData,
   editGood,
+  showPreview,
 };
