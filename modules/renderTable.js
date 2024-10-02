@@ -33,13 +33,17 @@ const removeRows = (url, cb) => {
 };
 
 // Открываем окно с картинкой по клику на кнопку
-const showPic = () => {
-  tbody.addEventListener('click', e => {
+const showPic = (url) => {
+  tbody.addEventListener('click', async e => {
     const target = e.target;
     const imgBtn = target.closest('.table__button_type_image');
+    const row = target.closest('.table__body-row');
+    const id = row.children[0].textContent;
+    const request = await fetch(`${url}${id}`);
+    const response = await request.json();
 
     if (imgBtn) {
-      const imgUrl = imgBtn.dataset.pic;
+      const imgUrl = 'https://cat-rainbow-babcat.glitch.me/' + response.image;
       const winImage = document.createElement('img');
       winImage.src = imgUrl;
 

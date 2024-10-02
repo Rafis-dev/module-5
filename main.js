@@ -18,7 +18,7 @@ const start = () => {
     renderGoods(getPostURL, totalPriceURL);
   });
 
-  showPic();
+  showPic(deleteURL);
 
   showModal(getPostURL, () => {
     renderGoods(getPostURL, totalPriceURL);
