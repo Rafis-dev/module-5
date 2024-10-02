@@ -5,7 +5,7 @@ import {loadModalStyles} from './loadModalStyles.js';
 const {closeModal, closeErrorModal} = modalControl;
 
 
-//Обработчик для подсчета общей стоимости товара 
+// Обработчик для подсчета общей стоимости товара 
 // в форме модального окна
 const handleChange = (e) => {
   const target = e.target;
@@ -49,6 +49,18 @@ const modalCheckbox = () => {
   document.addEventListener('click', handleCheckbox);
 };
 
+// конвертация файлов  формат base64
+const toBase64 = file => new Promise((resolve, reject) => {
+  const reader = new FileReader();
+  reader.addEventListener('load', () => {
+    resolve(reader.result);
+  });
+  reader.addEventListener('error', err => {
+    reject(err);
+  });
+  reader.readAsDataURL(file);
+});
+
 // Превью изображения
 const showPreview = () => {
   const file = document.querySelector('#file');
@@ -62,7 +74,7 @@ const showPreview = () => {
   previewImg.className = 'preview__img';
   preview.append(previewImg);
 
-  file.addEventListener('change', () => {
+  file.addEventListener('change', async () => {
     const existingMessage = document.querySelector('.preview__message');
     const existingPreview = document.querySelector('.preview');
 
@@ -74,8 +86,9 @@ const showPreview = () => {
         formFieldset.append(previewMessage);
         return;
       } else {
-        const src = URL.createObjectURL(file.files[0]);
-        previewImg.src = src;
+        // const src = URL.createObjectURL(file.files[0]);
+        const res = await toBase64(file.files[0]);
+        previewImg.src = res;
         formFieldset.append(preview);
         return;
       }
@@ -101,6 +114,7 @@ export const sendModalData = (url, cb) => {
       e.preventDefault();
       const formData = new FormData(e.target);
       const newProduct = Object.fromEntries(formData);
+      newProduct.image = await toBase64(newProduct.image);
       // newProduct.price = +promo.discountPrice;
 
       try {
@@ -149,6 +163,7 @@ const editGood = (url, createModal, cb) => {
       const modalForm = document.querySelector('.modal__form');
       const discountCheckbox = document.querySelector('.form__checkbox');
       const modalFormBtn = document.querySelector('.form__button');
+      const formFieldset = document.querySelector('.form__fieldset');
       const errorMessageElement =
         document.querySelector('.modal__error-message');
 
@@ -164,6 +179,23 @@ const editGood = (url, createModal, cb) => {
       modalForm.price.value = response.price;
       modalIdValue.textContent = response.id;
 
+
+      if (response.image !== 'image/notimage.jpg') {
+        const preview = document.createElement('div');
+        const previewImg = document.createElement('img');
+        preview.className = 'preview';
+        previewImg.className = 'preview__img';
+        const src = 'https://cat-rainbow-babcat.glitch.me/' + response.image;
+        previewImg.src = src;
+        preview.append(previewImg);
+        formFieldset.append(preview);
+
+        preview.addEventListener('click', () => {
+          preview.remove();
+        });
+      }
+
+
       if (response.discount > 0) {
         discountCheckbox.checked = true;
         modalForm.discount.removeAttribute('disabled');
@@ -177,9 +209,13 @@ const editGood = (url, createModal, cb) => {
         response.price) -
         (response.count * response.price / 100 * response.discount)).toFixed(2);
 
+
+
       modalCheckbox();
-      modalTotalPrice();
+      // Функция показа превью при добавлении
+      // изображения
       showPreview();
+      modalTotalPrice();
       closeErrorModal();
       closeModal();
 
@@ -197,6 +233,15 @@ const editGood = (url, createModal, cb) => {
           price: modalForm.price.value,
           discount: discountCheckbox.checked ? modalForm.discount.value : 0,
         };
+
+        if (modalForm.file.files.length > 0) {
+          updatedData.image = await toBase64(modalForm.file.files[0]);
+        }
+
+        if (!formFieldset.querySelector('.preview')) {
+          updatedData.image = 'image/notimage.jpg';
+        };
+
 
         // Отправляем PATCH запрос
         try {

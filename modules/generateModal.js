@@ -66,7 +66,7 @@ export const createModal = () => {
 
           <div class="form__grid-file form__grid-item">
             <label class="form__label form__label_type_file" for="file">Добавить изображение</label>
-            <input class="form__input visually-hidden" type="file" name="images" id="file" accept="image/*">
+            <input class="form__input visually-hidden" type="file" name="image" id="file" accept="image/*">
           </div>
         </fieldset>
 
