@@ -163,12 +163,14 @@ const editGood = (url, createModal, cb) => {
       const modalForm = document.querySelector('.modal__form');
       const discountCheckbox = document.querySelector('.form__checkbox');
       const modalFormBtn = document.querySelector('.form__button');
+      const modalTitle = document.querySelector('.modal__title');
       const formFieldset = document.querySelector('.form__fieldset');
       const errorMessageElement =
         document.querySelector('.modal__error-message');
 
       modalForm.reset();
       modalFormBtn.textContent = 'Изменить товар';
+      modalTitle.textContent = 'Изменить товар';
 
       // Заполняем поля формы данными с сервера
       modalForm.title.value = response.title;
