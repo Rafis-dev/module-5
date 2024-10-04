@@ -152,6 +152,11 @@ const editGood = (url, createModal, cb) => {
       const id = row.children[0].textContent;
       const request = await fetch(`${url}${id}`);
       const response = await request.json();
+      const existingModal = document.querySelector('.modal');
+
+      // Убираем баг двойного модального окна при
+      // двойном клике на редактирование
+      if (existingModal) existingModal.remove();
       // Подгружаем стили
       await loadModalStyles('./css/modal.css');
       // Открываем модальное окно

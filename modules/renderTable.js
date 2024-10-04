@@ -60,13 +60,6 @@ const showPic = (url) => {
     const request = await fetch(`${url}${id}`);
     const response = await request.json();
 
-    // if (response.image === 'image/notimage.jpg') {
-    //   const showImgIcon = document.querySelector('.table__button-show-img');
-    //   const noImgIcon = document.querySelector('.table__button-no-img');
-    //   showImgIcon.style.display = 'none';
-    //   noImgIcon.style.display = 'block';
-    // }
-
     if (imgBtn) {
       const imgUrl = 'https://cat-rainbow-babcat.glitch.me/' + response.image;
       const winImage = document.createElement('img');
