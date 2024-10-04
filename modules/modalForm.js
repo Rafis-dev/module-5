@@ -5,7 +5,7 @@ import {loadModalStyles} from './loadModalStyles.js';
 const {closeModal, closeErrorModal} = modalControl;
 
 
-// Обработчик для подсчета общей стоимости товара 
+// Обработчик для подсчета общей стоимости товара
 // в форме модального окна
 const handleChange = (e) => {
   const target = e.target;
@@ -210,8 +210,6 @@ const editGood = (url, createModal, cb) => {
       totalPriceModal.textContent = ((response.count *
         response.price) -
         (response.count * response.price / 100 * response.discount)).toFixed(2);
-
-
 
       modalCheckbox();
       // Функция показа превью при добавлении

@@ -12,7 +12,25 @@ const renderGoods = async (url, totalPriceURL) => {
   const totalPriceData = await fetch(totalPriceURL);
   const totalPriceResult = await totalPriceData.json();
   tbody.innerHTML = '';
-  result.map(createRow).forEach(row => tbody.append(row));
+
+  // Получаем id по которым от сервера нет изображения
+  const noImgId = result
+    .filter(item => item.image === 'image/notimage.jpg')
+    .map(item => item.id);
+
+  result.map(createRow).forEach(row => {
+    // создаем строчки
+    tbody.append(row);
+    // меняем иконки в зависимости от того,
+    // были ли получены изображения  с сервера
+    const rowId = row.querySelector('.table__body-id').textContent.trim();
+    if (noImgId.includes(rowId)) {
+      row.querySelector('.table__button-show-img').remove();
+      row.querySelector('.table__button-no-img').style.display = 'block';
+      row.querySelector('.table__button-no-img')
+        .closest('.table__button_type_image').style.pointerEvents = 'none';
+    }
+  });
   totalPrice.textContent = `$ ${totalPriceResult}`;
 };
 
@@ -41,6 +59,13 @@ const showPic = (url) => {
     const id = row.children[0].textContent;
     const request = await fetch(`${url}${id}`);
     const response = await request.json();
+
+    // if (response.image === 'image/notimage.jpg') {
+    //   const showImgIcon = document.querySelector('.table__button-show-img');
+    //   const noImgIcon = document.querySelector('.table__button-no-img');
+    //   showImgIcon.style.display = 'none';
+    //   noImgIcon.style.display = 'block';
+    // }
 
     if (imgBtn) {
       const imgUrl = 'https://cat-rainbow-babcat.glitch.me/' + response.image;

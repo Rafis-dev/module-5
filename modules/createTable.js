@@ -4,7 +4,7 @@ export const createRow = (item) => {
   row.classList.add('table__body-row');
 
   row.innerHTML = `
-    <td class="table__body-data">${item.id}</td>
+    <td class="table__body-data table__body-id">${item.id}</td>
     <td class="table__body-data">${item.title}</td>
     <td class="table__body-data">${item.category}</td>
     <td class="table__body-data table__body-data_type_unit 
@@ -18,8 +18,11 @@ export const createRow = (item) => {
     <td class="table__body-data 
     table__body-buttons table__body-data_text_right">
       <button class="table__button table__button_type_image" type="button"  data-pic="https://placehold.co/580x580/jpg?text=Hello+World">
-        <img class="table__button-img" 
+        <img class="table__button-img table__button-show-img" 
         src="assets/images/icons/image.svg" alt="иконка изображения">
+         <img class="table__button-img table__button-no-img" 
+        src="assets/images/icons/no-image.svg" 
+        alt="иконка перечеркнутого изображения">
       </button>
       <button class="table__button table__button_type_edit" type="button">
         <img class="table__button-img" 
