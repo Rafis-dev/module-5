@@ -10,7 +10,7 @@ html {
 body {
   min-width: 320px;
   min-height: 100vh;
-  font-family: "Inter", sans-serif;
+  font-family: "Roboto", sans-serif;
   background-color: #F2F0F9;
 }
 
@@ -67,7 +67,7 @@ ul {
 }
 
 .container {
-  max-width: 1240px;
+  max-width: 1170px;
   padding: 0 15px;
   margin: 0 auto;
 }
