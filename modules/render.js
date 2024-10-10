@@ -9,14 +9,30 @@ const getData = async (url) => {
 const showArticles = async (url) => {
   const data = await getData(url);
   const result = data.articles;
+  let filteredArray = [];
+  const removeArr = [];
+
+  result.forEach(item => {
+    if (item.title === null || item.title === '[Removed]') {
+      removeArr.push(item);
+    }
+  });
 
 
-  if (result.urlToImage === null) {
-    result.urlToImage = 'https://placehold.co/580x580/jpg?text=Hello+World';
-  }
 
   const newsItems = result.map(item => {
     const newsListItem = document.createElement('li');
+
+    if (item.urlToImage === null) {
+      item.urlToImage = 'https://placehold.co/270x200/jpg?text=No+image';
+    }
+    if (item.author === null) {
+      item.author = 'Author unknown';
+    }
+    if (item.description === null) {
+      item.description = 'No description';
+    }
+
     newsListItem.className = 'news__item';
     newsListItem.innerHTML = `
      <a class="news__link" href="#">
@@ -38,5 +54,5 @@ const showArticles = async (url) => {
   newsList.append(...newsItems);
 };
 
-showArticles('https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=07465d53b9f34cbd91fffc2fd2a9898c');
+showArticles('https://newsapi.org/v2/top-headlines?country=us&apiKey=07465d53b9f34cbd91fffc2fd2a9898c');
 
