@@ -1,5 +1,6 @@
 const newsList = document.querySelector('.news');
 
+// запрашиваем данные с сервера
 const getData = async (url) => {
   const data = await fetch(`${url}`);
   const response = await data.json();
@@ -9,18 +10,18 @@ const getData = async (url) => {
 const showArticles = async (url) => {
   const data = await getData(url);
   const result = data.articles;
-  let filteredArray = [];
-  const removeArr = [];
 
-  result.forEach(item => {
-    if (item.title === null || item.title === '[Removed]') {
-      removeArr.push(item);
-    }
-  });
+  let names = result.map(obj => ({name: obj.author}));
+
+  console.log(names);
 
 
 
-  const newsItems = result.map(item => {
+
+  // фильтруем удаленные статьи, чтобы они не выводились на страницу
+  const filteredArray = result.filter(item => item.title !== '[Removed]' && item.title !== null);
+
+  const newsItems = filteredArray.map(item => {
     const newsListItem = document.createElement('li');
 
     if (item.urlToImage === null) {
@@ -36,7 +37,7 @@ const showArticles = async (url) => {
     newsListItem.className = 'news__item';
     newsListItem.innerHTML = `
      <a class="news__link" href="#">
-     <img class="news__img" src="${item.urlToImage}" alt="картинка к статье">
+     <img class="news__img" src="${item.urlToImage}" alt="обложка статьи">
        <h2 class="news__title">${item.title}</h2>
        <p class="news__intro">${item.description}</p>
        <div class="news__footer">
