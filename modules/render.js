@@ -1,4 +1,4 @@
-const newsList = document.querySelector('.news');
+export const newsList = document.querySelector('.news');
 
 // запрашиваем данные с сервера
 const getData = async (url) => {
@@ -7,23 +7,16 @@ const getData = async (url) => {
   return response;
 };
 
-const showArticles = async (url) => {
+export const getArticles = async (url) => {
   const data = await getData(url);
   const result = data.articles;
-
-  let names = result.map(obj => ({name: obj.author}));
-
-  console.log(names);
-
-
-
-
   // фильтруем удаленные статьи, чтобы они не выводились на страницу
   const filteredArray = result.filter(item => item.title !== '[Removed]' && item.title !== null);
 
   const newsItems = filteredArray.map(item => {
     const newsListItem = document.createElement('li');
 
+    // проверяем наличие изображения, автора, описания
     if (item.urlToImage === null) {
       item.urlToImage = 'https://placehold.co/270x200/jpg?text=No+image';
     }
@@ -36,7 +29,7 @@ const showArticles = async (url) => {
 
     newsListItem.className = 'news__item';
     newsListItem.innerHTML = `
-     <a class="news__link" href="#">
+     <a class="news__link" href="${item.url}" target="_blank">
      <img class="news__img" src="${item.urlToImage}" alt="обложка статьи">
        <h2 class="news__title">${item.title}</h2>
        <p class="news__intro">${item.description}</p>
@@ -49,11 +42,16 @@ const showArticles = async (url) => {
        </div>
    </a>
      `;
+
+    // Получаем ссылку на изображение и добавляем обработчик error
+    const newsImg = newsListItem.querySelector('.news__img');
+    newsImg.addEventListener('error', () => {
+      newsImg.src = 'https://placehold.co/270x200/jpg?text=No+image'; // Замена при ошибке загрузки
+    });
+
     return newsListItem;
   });
-
-  newsList.append(...newsItems);
+  return newsItems;
 };
 
-showArticles('https://newsapi.org/v2/top-headlines?country=us&apiKey=07465d53b9f34cbd91fffc2fd2a9898c');
-
+getArticles('https://newsapi.org/v2/top-headlines?country=us&apiKey=07465d53b9f34cbd91fffc2fd2a9898c').then(data => newsList.append(...data));

@@ -54,7 +54,8 @@
   border-bottom: 1px solid #e6e6e6;
 }
 
-.main__title-container {
+.main__title-container,
+.search__title-container {
   max-width: 100%;
   border-top: 1px solid #e6e6e6;
   border-bottom: 1px solid #e6e6e6;
@@ -78,6 +79,11 @@
   grid-template-columns: repeat(auto-fit, minmax(240px, 270px));
   justify-content: center;
   gap: 40px 20px;
+}
+
+.search-news {
+  padding-top: 40px;
+  padding-bottom: 40px
 }
 
 .news__link {
