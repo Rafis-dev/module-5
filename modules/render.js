@@ -17,11 +17,11 @@ export const getArticles = async (url) => {
     const newsListItem = document.createElement('li');
 
     // проверяем наличие изображения, автора, описания
-    if (item.urlToImage === null) {
-      item.urlToImage = 'https://placehold.co/270x200/jpg?text=No+image';
+    if (item.image === null) {
+      item.image = 'https://placehold.co/270x200/jpg?text=No+image';
     }
-    if (item.author === null) {
-      item.author = 'Author unknown';
+    if (item.source.name === null) {
+      item.source.name = 'Author unknown';
     }
     if (item.description === null) {
       item.description = 'No description';
@@ -30,7 +30,7 @@ export const getArticles = async (url) => {
     newsListItem.className = 'news__item';
     newsListItem.innerHTML = `
      <a class="news__link" href="${item.url}" target="_blank">
-     <img class="news__img" src="${item.urlToImage}" alt="обложка статьи">
+     <img class="news__img" src="${item.image}" alt="обложка статьи">
        <h2 class="news__title">${item.title}</h2>
        <p class="news__intro">${item.description}</p>
        <div class="news__footer">
@@ -38,7 +38,7 @@ export const getArticles = async (url) => {
            <span class="news__day">${item.publishedAt.split('T')[0]}</span>
            <span class="news__time">${item.publishedAt.split('T')[1].split('Z')[0]}</span>
          </p>
-         <p class="news__author">${item.author}</p>
+         <p class="news__author">${item.source.name}</p>
        </div>
    </a>
      `;
@@ -54,4 +54,5 @@ export const getArticles = async (url) => {
   return newsItems;
 };
 
-getArticles('https://newsapi.org/v2/top-headlines?country=us&apiKey=07465d53b9f34cbd91fffc2fd2a9898c').then(data => newsList.append(...data));
+getArticles('https://gnews.io/api/v4/top-headlines?category=general&lang=ru&country=ru&max=8&apikey=33057ca922c73f3312249ea367e64960').then(data => newsList.append(...data));
+

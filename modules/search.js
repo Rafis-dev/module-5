@@ -12,8 +12,8 @@ const getSearchArticles = () => {
     const searchQuery = formDataResult.search;
 
     // Формируем URL для запроса результатов поиска и заголовков новостей
-    const searchUrl = `https://newsapi.org/v2/everything?q=${searchQuery}&searchIn=content&pageSize=16&sortBy=popularity&apiKey=07465d53b9f34cbd91fffc2fd2a9898c`;
-    const headlinesUrl = `https://newsapi.org/v2/top-headlines?country=us&pageSize=8&apiKey=07465d53b9f34cbd91fffc2fd2a9898c`;
+    const searchUrl = `https://gnews.io/api/v4/search?q=${searchQuery}&lang=ru&country=ru&sortby=relevance&max=8&apikey=33057ca922c73f3312249ea367e64960`;
+    const headlinesUrl = `https://gnews.io/api/v4/top-headlines?category=general&lang=ru&country=ru&max=8&apikey=33057ca922c73f3312249ea367e64960`;
 
     let searchResponse;
     let headlinesResponse;
@@ -34,12 +34,15 @@ const getSearchArticles = () => {
     const previousNewsList = document.querySelector('.news-list');
     if (previousSearchTitle) {
       previousSearchTitle.remove();
-      previousSearchNews.remove();
+      if (previousSearchNews) {
+        previousSearchNews.remove();
+      }
     }
 
     if (previousNewsList) {
       newsList.innerHTML = '';
     }
+
 
     // Создаем новые элементы для отображения результатов поиска
     const titleContainer = document.createElement('div');
@@ -59,12 +62,20 @@ const getSearchArticles = () => {
       </div>
     `;
 
+    if (searchResponse.length > 0) {
+      // Отображаем статьи на странице
+      searchNews.append(...searchResponse);
+    } else {
+      searchNews.remove();
+    }
+
     // Отображаем статьи на странице
-    searchNews.append(...searchResponse);
+
     newsList.append(...headlinesResponse);
 
     // Сбрасываем форму
     form.reset();
+
   });
 };
 
