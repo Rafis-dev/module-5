@@ -12,8 +12,9 @@ const getSearchArticles = () => {
     const searchQuery = formDataResult.search;
 
     // Формируем URL для запроса результатов поиска и заголовков новостей
-    const searchUrl = `https://gnews.io/api/v4/search?q=${searchQuery}&lang=ru&country=ru&sortby=relevance&max=8&apikey=33057ca922c73f3312249ea367e64960`;
-    const headlinesUrl = `https://gnews.io/api/v4/top-headlines?category=general&lang=ru&country=ru&max=8&apikey=33057ca922c73f3312249ea367e64960`;
+    const key = '33057ca922c73f3312249ea367e64960';
+    const searchUrl = `https://gnews.io/api/v4/search?q=${searchQuery}&lang=ru&country=ru&sortby=relevance&max=8&apikey=${key}`;
+    const headlinesUrl = `https://gnews.io/api/v4/top-headlines?category=general&lang=ru&country=ru&max=4&apikey=${key}`;
 
     let searchResponse;
     let headlinesResponse;

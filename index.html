@@ -14,79 +14,81 @@
 </head>
 
 <body>
-  <header class="header">
-    <div class="container">
-      <div class="header__wrapper">
-        <div class="header__logo-box">
-          <img class="header__logo-img" src="images/logo.png" alt="логотип новости">
-        </div>
+  <div class="wrapper">
 
-        <form id="myForm" class="header__search-form" action="#" method="get">
-          <input class="header__search-input" type="search" name="search" placeholder="Я хочу узнать про...">
-          <button class="header__search-button" type="submit"></button>
-        </form>
-
-        <div class="header__select-box">
-          <select form="myForm" class="header__select" name="country">
-            <option value="">Выберите страну</option>
-            <option value="russia" selected>Россия</option>
-            <option value="usa">США</option>
-          </select>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main class="main">
-    <h1 class="visually-hidden">Новости</h1>
-
-    <div class="container main__title-container">
+    <header class="header">
       <div class="container">
-        <h2 class="main__title">Свежие новости</h2>
-      </div>
-    </div>
+        <div class="header__wrapper">
+          <div class="header__logo-box">
+            <img class="header__logo-img" src="images/logo.png" alt="логотип новости">
+          </div>
 
-    <div class="container">
-      <ul class="news-list news">
+          <form id="myForm" class="header__search-form" action="#" method="get">
+            <input class="header__search-input" type="search" name="search" placeholder="Я хочу узнать про...">
+            <button class="header__search-button" type="submit"></button>
+          </form>
 
-      </ul>
-    </div>
-
-  </main>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__wrapper">
-        <div class="footer__logo-box">
-          <img class="footer__logo-img" src="images/logo.png" alt="логотип новости">
+          <div class="header__select-box">
+            <select form="myForm" class="header__select" name="country">
+              <option value="">Выберите страну</option>
+              <option value="russia" selected>Россия</option>
+              <option value="usa">США</option>
+            </select>
+          </div>
         </div>
-
-        <p class="footer__year">
-          © 2020-2022 News
-        </p>
-
-        <ul class="footer__social">
-          <li class="footer__social-item">
-            <a class="footer__social-link" href="#">
-              <img class="footer__social-img" src="images/twitter-icon.png" alt=" иконка социальной сети">
-            </a>
-          </li>
-          <li class="footer__social-item">
-            <a class="footer__social-link" href="#">
-              <img class="footer__social-img" src="images/habr-icon.png" alt=" иконка социальной сети">
-            </a>
-          </li>
-          <li class="footer__social-item">
-            <a class="footer__social-link" href="#">
-              <img class="footer__social-img" src="images/vk-icon.png" alt=" иконка социальной сети">
-            </a>
-          </li>
-        </ul>
-
       </div>
-    </div>
-  </footer>
+    </header>
 
+    <main class="main">
+      <h1 class="visually-hidden">Новости</h1>
+
+      <div class="container main__title-container">
+        <div class="container">
+          <h2 class="main__title">Свежие новости</h2>
+        </div>
+      </div>
+
+      <div class="container">
+        <ul class="news-list news">
+
+        </ul>
+      </div>
+
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__wrapper">
+          <div class="footer__logo-box">
+            <img class="footer__logo-img" src="images/logo.png" alt="логотип новости">
+          </div>
+
+          <p class="footer__year">
+            © 2020-2022 News
+          </p>
+
+          <ul class="footer__social">
+            <li class="footer__social-item">
+              <a class="footer__social-link" href="#">
+                <img class="footer__social-img" src="images/twitter-icon.png" alt=" иконка социальной сети">
+              </a>
+            </li>
+            <li class="footer__social-item">
+              <a class="footer__social-link" href="#">
+                <img class="footer__social-img" src="images/habr-icon.png" alt=" иконка социальной сети">
+              </a>
+            </li>
+            <li class="footer__social-item">
+              <a class="footer__social-link" href="#">
+                <img class="footer__social-img" src="images/vk-icon.png" alt=" иконка социальной сети">
+              </a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </footer>
+  </div>
 </body>
 
 </html>

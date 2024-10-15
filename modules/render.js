@@ -1,4 +1,6 @@
 export const newsList = document.querySelector('.news');
+const key = '33057ca922c73f3312249ea367e64960';
+const mainURL = `https://gnews.io/api/v4/top-headlines?category=general&lang=ru&country=ru&max=8&apikey=${key}`;
 
 // запрашиваем данные с сервера
 const getData = async (url) => {
@@ -54,5 +56,5 @@ export const getArticles = async (url) => {
   return newsItems;
 };
 
-getArticles('https://gnews.io/api/v4/top-headlines?category=general&lang=ru&country=ru&max=8&apikey=33057ca922c73f3312249ea367e64960').then(data => newsList.append(...data));
+getArticles(mainURL).then(data => newsList.append(...data));
 

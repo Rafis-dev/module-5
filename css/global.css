@@ -9,7 +9,6 @@ html {
 
 body {
   min-width: 320px;
-  min-height: 100vh;
   font-family: "Roboto", sans-serif;
   background-color: #FFF;
 }
@@ -54,6 +53,11 @@ ul {
   list-style: none;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -70,4 +74,18 @@ ul {
   max-width: 1170px;
   padding: 0 15px;
   margin: 0 auto;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main {
+  flex: 1 1 auto;
+}
+
+.footer {
+  flex: 0 0 auto;
 }
