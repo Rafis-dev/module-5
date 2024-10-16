@@ -4,7 +4,7 @@ import modalFormData from './modalForm.js';
 import modalControl from './modalControl.js';
 import {loadModalStyles} from './loadModalStyles.js';
 const {closeModal, closeErrorModal} = modalControl;
-const {modalTotalPrice, modalCheckbox, showPreview} = modalFormData;
+const {modalTotalPrice, modalCheckbox, showPreview, checkTextarea} = modalFormData;
 
 // Генерим модальное окно
 export const createModal = () => {
@@ -32,19 +32,25 @@ export const createModal = () => {
             Наименование
             </label>
             <input class="form__input form-name" type="text" 
-            name="title" id="name" required>
+            name="title" id="name" required 
+            pattern="^[А-Яа-яЁё\\s]+$" 
+            title="Допустимы только буквы кириллицы и пробелы">
           </div>
 
           <div class="form__grid-category form__grid-item">
             <label class="form__label" for="category">Категория</label>
             <input class="form__input" type="text" 
-            name="category" id="category" required>
+            name="category" id="category" required 
+            pattern="^[А-Яа-яЁё\\s]+$" 
+            title="Допустимы только буквы кириллицы и пробелы">
           </div>
 
           <div class="form__grid-unit form__grid-item">
             <label class="form__label" for="unit">Единицы измерения</label>
             <input class="form__input" type="text" 
-            name="units" id="unit" required>
+            name="units" id="unit" required 
+            pattern="^[А-Яа-яЁё]+$" 
+            title="Допустимы только буквы кириллицы">
           </div>
 
           <div class="form__grid-discount form__grid-item">
@@ -53,26 +59,33 @@ export const createModal = () => {
               <input class="form__checkbox" type="checkbox">
               <input disabled class="form__input" 
               type="number" min="0" max="100" 
-              name="discount" id="discount">
+              name="discount" id="discount" 
+              pattern="^\\d+$" 
+              title="Допустимы только цифры">
             </div>
           </div>
 
           <div class="form__grid-descr form__grid-item">
             <label class="form__label" for="descr">Описание</label>
             <textarea class="form__input form__input_textarea_descr" 
-            name="description" id="descr" required></textarea>
+            name="description" id="descr" required
+            pattern="^[А-Яа-яЁё\\s]+$" 
+            minlength = "80"
+            title="Допустимы только буквы кириллицы и пробелы. Минимум 80 символов"></textarea>
           </div>
 
           <div class="form__grid-quantity form__grid-item">
             <label class="form__label" for="quantity">Количество</label>
             <input class="form__input" type="number" min="0" 
-            name="count" id="quantity" required>
+            name="count" id="quantity" required 
+            pattern="^\\d+$" title="Допустимы только цифры">
           </div>
 
           <div class="form__grid-price form__grid-item">
             <label class="form__label" for="price">Цена</label>
             <input class="form__input" type="number" min="0" 
-            name="price" id="price" required>
+            name="price" id="price" required 
+            pattern="^\\d+$" title="Допустимы только цифры">
           </div>
 
           <div class="form__grid-file form__grid-item">
@@ -119,6 +132,7 @@ export const showModal = (url, cb) => {
     createModal();
     modalCheckbox();
     showPreview();
+    checkTextarea();
     modalTotalPrice();
     sendModalData(url, cb);
     closeErrorModal();

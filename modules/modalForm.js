@@ -144,6 +144,24 @@ export const sendModalData = (url, cb) => {
   }, {once: true});
 };
 
+// Регулярное выражение для textarea
+const checkTextarea = () => {
+  const regex = /^[А-Яа-яЁё\s]+$/;
+  const textarea = document.getElementById('descr');
+
+  textarea.addEventListener('input', () => {
+    // Проверка на соответствие шаблону и минимальную длину
+    if (!regex.test(textarea.value) || textarea.value.length < 80) {
+      // Устанавливаем сообщение об ошибке, используя атрибут title
+      textarea.setCustomValidity(textarea.title);
+    } else {
+      // Сбрасываем сообщение об ошибке, если всё в порядке
+      textarea.setCustomValidity('');
+    }
+    textarea.reportValidity();
+  });
+};
+
 // Открываем модальное окно для редактирования
 const editGood = (url, createModal, cb) => {
   tbody.addEventListener('click', async ({target}) => {
@@ -187,6 +205,7 @@ const editGood = (url, createModal, cb) => {
       modalIdValue.textContent = response.id;
 
 
+      // Если с сервера получено изображение, то показываем превью
       if (response.image !== 'image/notimage.jpg') {
         const preview = document.createElement('div');
         const previewImg = document.createElement('img');
@@ -216,6 +235,7 @@ const editGood = (url, createModal, cb) => {
         response.price) -
         (response.count * response.price / 100 * response.discount)).toFixed(2);
 
+      checkTextarea();
       modalCheckbox();
       // Функция показа превью при добавлении
       // изображения
@@ -285,4 +305,5 @@ export default {
   sendModalData,
   editGood,
   showPreview,
+  checkTextarea,
 };
